@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using QuartzTopShelf.Linux.Service;
 using Serilog;
@@ -11,8 +10,6 @@ namespace QuartzTopShelf.Linux.TopShelf
 {
     public class Program
     {
-
-
         public static void Main()
         {
             var rc = HostFactory.Run(x =>
@@ -31,7 +28,7 @@ namespace QuartzTopShelf.Linux.TopShelf
                     .WriteTo.File($"{Path.GetTempPath()}logs\\myapp.txt", rollingInterval: RollingInterval.Day)
                     .CreateLogger();
                 x.UseSerilog(Log.Logger);
-                
+
                 x.SetDescription("Topshelf with Quartz and Serilog");
                 x.SetDisplayName("Topshelf with Quartz");
                 x.SetServiceName("Topshelf-Quartz");
@@ -40,8 +37,5 @@ namespace QuartzTopShelf.Linux.TopShelf
             var exitCode = (int)Convert.ChangeType(rc, rc.GetTypeCode());
             Environment.ExitCode = exitCode;
         }
-
-
-
     }
 }

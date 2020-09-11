@@ -5,11 +5,11 @@ using System.Runtime.Loader;
 
 namespace QuartzTopShelf.Linux.Core
 {
-    class Program
+    internal class Program
     {
         private static ScheduleService _service;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
@@ -27,11 +27,13 @@ namespace QuartzTopShelf.Linux.Core
                 System.Console.Read();
             };
         }
+
         private static void SigTermEventHandler(AssemblyLoadContext obj)
         {
             Log.Information("Unloading...");
             _service.Stop();
         }
+
         private static void CancelHandler(object sender, ConsoleCancelEventArgs e)
         {
             Log.Information("Exiting...");
